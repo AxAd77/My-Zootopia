@@ -12,85 +12,99 @@ def serialize_animal(animal_obj):
     output = ""
     output += '<li class="cards__item">\n'
     output += f'    <div class="card__title">{animal_obj["name"]}</div>\n'
-    output += '    <p class="card__text">\n'
+    output += '    <div class="card__text">\n'
+    output += '        <ul class="card__details">\n'
 
     taxonomy = animal_obj.get("taxonomy", {})
     characteristics = animal_obj.get("characteristics", {})
 
     if "scientific_name" in taxonomy:
         output += (
-            f'        <strong>Scientific name:</strong> '
-            f'{taxonomy["scientific_name"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Scientific name:</strong> '
+            f'{taxonomy["scientific_name"]}</li>\n'
         )
 
     if "diet" in characteristics:
         output += (
-            f'        <strong>Diet:</strong> '
-            f'{characteristics["diet"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Diet:</strong> '
+            f'{characteristics["diet"]}</li>\n'
         )
 
     if animal_obj["locations"]:
         locations = ", ".join(animal_obj["locations"])
         output += (
-            f'        <strong>Location:</strong> '
-            f'{locations}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Location:</strong> '
+            f'{locations}</li>\n'
         )
 
     if "type" in characteristics:
         output += (
-            f'        <strong>Type:</strong> '
-            f'{characteristics["type"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Type:</strong> '
+            f'{characteristics["type"]}</li>\n'
         )
 
     if "habitat" in characteristics:
         output += (
-            f'        <strong>Habitat:</strong> '
-            f'{characteristics["habitat"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Habitat:</strong> '
+            f'{characteristics["habitat"]}</li>\n'
         )
 
     if "lifespan" in characteristics:
         output += (
-            f'        <strong>Lifespan:</strong> '
-            f'{characteristics["lifespan"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Lifespan:</strong> '
+            f'{characteristics["lifespan"]}</li>\n'
         )
 
     if "weight" in characteristics:
         output += (
-            f'        <strong>Weight:</strong> '
-            f'{characteristics["weight"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Weight:</strong> '
+            f'{characteristics["weight"]}</li>\n'
         )
 
     if "height" in characteristics:
         output += (
-            f'        <strong>Height:</strong> '
-            f'{characteristics["height"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Height:</strong> '
+            f'{characteristics["height"]}</li>\n'
         )
 
     if "length" in characteristics:
         output += (
-            f'        <strong>Length:</strong> '
-            f'{characteristics["length"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Length:</strong> '
+            f'{characteristics["length"]}</li>\n'
         )
 
     if "color" in characteristics:
         output += (
-            f'        <strong>Color:</strong> '
-            f'{characteristics["color"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Color:</strong> '
+            f'{characteristics["color"]}</li>\n'
         )
 
     if "skin_type" in characteristics:
         output += (
-            f'        <strong>Skin type:</strong> '
-            f'{characteristics["skin_type"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Skin type:</strong> '
+            f'{characteristics["skin_type"]}</li>\n'
         )
 
     if "top_speed" in characteristics:
         output += (
-            f'        <strong>Top speed:</strong> '
-            f'{characteristics["top_speed"]}<br/>\n'
+            f'            <li class="card__detail">'
+            f'<strong>Top speed:</strong> '
+            f'{characteristics["top_speed"]}</li>\n'
         )
 
-    output += "    </p>\n"
+    output += "        </ul>\n"
+    output += "    </div>\n"
     output += "</li>\n"
 
     return output

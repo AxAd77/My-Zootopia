@@ -35,6 +35,20 @@ body {
     padding: 0;
 }
 
+.card__details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card__detail {
+    margin-bottom: 5px;
+}
+
+.card__detail:last-child {
+    margin-bottom: 0;
+}
+
 .cards__item {
     background-color: white;
     border-radius: 0.25rem;
@@ -45,6 +59,7 @@ body {
 }
 
 .card__title {
+    margin-bottom: 15px;
     color: var(--gray-dark);
     font-size: 1.25rem;
     font-weight: 300;
@@ -56,5 +71,5 @@ body {
     flex: 1 1 auto;
     font-size: 0.95rem;
     line-height: 2;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0;
 }
