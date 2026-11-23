@@ -14,22 +14,80 @@ def serialize_animal(animal_obj):
     output += f'    <div class="card__title">{animal_obj["name"]}</div>\n'
     output += '    <p class="card__text">\n'
 
-    if "diet" in animal_obj["characteristics"]:
+    taxonomy = animal_obj.get("taxonomy", {})
+    characteristics = animal_obj.get("characteristics", {})
+
+    if "scientific_name" in taxonomy:
+        output += (
+            f'        <strong>Scientific name:</strong> '
+            f'{taxonomy["scientific_name"]}<br/>\n'
+        )
+
+    if "diet" in characteristics:
         output += (
             f'        <strong>Diet:</strong> '
-            f'{animal_obj["characteristics"]["diet"]}<br/>\n'
+            f'{characteristics["diet"]}<br/>\n'
         )
 
     if animal_obj["locations"]:
+        locations = ", ".join(animal_obj["locations"])
         output += (
             f'        <strong>Location:</strong> '
-            f'{animal_obj["locations"][0]}<br/>\n'
+            f'{locations}<br/>\n'
         )
 
-    if "type" in animal_obj["characteristics"]:
+    if "type" in characteristics:
         output += (
             f'        <strong>Type:</strong> '
-            f'{animal_obj["characteristics"]["type"]}<br/>\n'
+            f'{characteristics["type"]}<br/>\n'
+        )
+
+    if "habitat" in characteristics:
+        output += (
+            f'        <strong>Habitat:</strong> '
+            f'{characteristics["habitat"]}<br/>\n'
+        )
+
+    if "lifespan" in characteristics:
+        output += (
+            f'        <strong>Lifespan:</strong> '
+            f'{characteristics["lifespan"]}<br/>\n'
+        )
+
+    if "weight" in characteristics:
+        output += (
+            f'        <strong>Weight:</strong> '
+            f'{characteristics["weight"]}<br/>\n'
+        )
+
+    if "height" in characteristics:
+        output += (
+            f'        <strong>Height:</strong> '
+            f'{characteristics["height"]}<br/>\n'
+        )
+
+    if "length" in characteristics:
+        output += (
+            f'        <strong>Length:</strong> '
+            f'{characteristics["length"]}<br/>\n'
+        )
+
+    if "color" in characteristics:
+        output += (
+            f'        <strong>Color:</strong> '
+            f'{characteristics["color"]}<br/>\n'
+        )
+
+    if "skin_type" in characteristics:
+        output += (
+            f'        <strong>Skin type:</strong> '
+            f'{characteristics["skin_type"]}<br/>\n'
+        )
+
+    if "top_speed" in characteristics:
+        output += (
+            f'        <strong>Top speed:</strong> '
+            f'{characteristics["top_speed"]}<br/>\n'
         )
 
     output += "    </p>\n"
