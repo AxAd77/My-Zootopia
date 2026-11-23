@@ -7,6 +7,35 @@ def load_data(file_path):
         return json.load(handle)
 
 
+def get_skin_types(animals_data):
+    """Returns a list of all available skin types."""
+    skin_types = []
+
+    for animal in animals_data:
+        characteristics = animal.get("characteristics", {})
+
+        if "skin_type" in characteristics:
+            skin_type = characteristics["skin_type"]
+
+            if skin_type not in skin_types:
+                skin_types.append(skin_type)
+
+    return skin_types
+
+
+def filter_animals_by_skin_type(animals_data, selected_skin_type):
+    """Returns animals matching the selected skin type."""
+    filtered_animals = []
+
+    for animal in animals_data:
+        characteristics = animal.get("characteristics", {})
+
+        if characteristics.get("skin_type") == selected_skin_type:
+            filtered_animals.append(animal)
+
+    return filtered_animals
+
+
 def serialize_animal(animal_obj):
     """Serializes a single animal into an HTML card."""
     output = ""
@@ -112,13 +141,31 @@ def serialize_animal(animal_obj):
 
 def main():
     animals_data = load_data("animals_data.json")
+    skin_types = get_skin_types(animals_data)
+
+    print("Available skin types:")
+
+    for skin_type in skin_types:
+        print(skin_type)
+
+    while True:
+        selected_skin_type = input("Please choose a skin type: ")
+
+        if selected_skin_type in skin_types:
+            break
+
+        print("Invalid skin type. Please try again.")
 
     with open("animals_template.html", "r") as handle:
         html_template = handle.read()
 
+    filtered_animals = filter_animals_by_skin_type(
+        animals_data, selected_skin_type
+    )
+
     output = ""
 
-    for animal_obj in animals_data:
+    for animal_obj in filtered_animals:
         output += serialize_animal(animal_obj)
 
     html_content = html_template.replace(
