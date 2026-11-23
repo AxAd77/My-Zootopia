@@ -7,6 +7,37 @@ def load_data(file_path):
         return json.load(handle)
 
 
+def serialize_animal(animal_obj):
+    """Serializes a single animal into an HTML card."""
+    output = ""
+    output += '<li class="cards__item">\n'
+    output += f'    <div class="card__title">{animal_obj["name"]}</div>\n'
+    output += '    <p class="card__text">\n'
+
+    if "diet" in animal_obj["characteristics"]:
+        output += (
+            f'        <strong>Diet:</strong> '
+            f'{animal_obj["characteristics"]["diet"]}<br/>\n'
+        )
+
+    if animal_obj["locations"]:
+        output += (
+            f'        <strong>Location:</strong> '
+            f'{animal_obj["locations"][0]}<br/>\n'
+        )
+
+    if "type" in animal_obj["characteristics"]:
+        output += (
+            f'        <strong>Type:</strong> '
+            f'{animal_obj["characteristics"]["type"]}<br/>\n'
+        )
+
+    output += "    </p>\n"
+    output += "</li>\n"
+
+    return output
+
+
 def main():
     animals_data = load_data("animals_data.json")
 
@@ -15,24 +46,12 @@ def main():
 
     output = ""
 
-    for animal in animals_data:
-        output += '<li class="cards__item">\n'
-        output += f'    <div class="card__title">{animal["name"]}</div>\n'
-        output += '    <p class="card__text">\n'
+    for animal_obj in animals_data:
+        output += serialize_animal(animal_obj)
 
-        if "diet" in animal["characteristics"]:
-            output += f'        <strong>Diet:</strong> {animal["characteristics"]["diet"]}<br/>\n'
-
-        if animal["locations"]:
-            output += f'        <strong>Location:</strong> {animal["locations"][0]}<br/>\n'
-
-        if "type" in animal["characteristics"]:
-            output += f'        <strong>Type:</strong> {animal["characteristics"]["type"]}<br/>\n'
-
-        output += '    </p>\n'
-        output += '</li>\n'
-
-    html_content = html_template.replace("__REPLACE_ANIMALS_INFO__", output)
+    html_content = html_template.replace(
+        "__REPLACE_ANIMALS_INFO__", output
+    )
 
     with open("animals.html", "w") as handle:
         handle.write(html_content)
